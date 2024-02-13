@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+    background: white;
+}
+
+.Toolbar {
+    float: left;
+    font-family: 'Trebuchet MS'; 
+    font-size: 14px;
+    font-variant: small-caps;
+    text-align: center;
+    background: #F2F7FE;
+    padding: 10px 15px 3px 10px;
+    margin-bottom: 1px;
+    margin-right: 1px;
+    border: 1px solid #7B899B;
+}
+
+.Toolbar button {
+    padding: 6px;
+    margin: 7px 2px;
+    font-variant: normal;
+    font-size: 12px;
+}
+
+.CanvasContainer {
+    clear: both;
+    background: rgb(255, 255, 255);
+}
+
+canvas {
+    border: 1px solid #7B899B;
+}
+/* обрати внимание, img нужно будет заменить на что-то другое (сменить назкание) */
+img {   
+    padding: 2px;
+    border: 2px solid #F2F7FE;
+    height: 40px;
+    width: 40px;
+}
+
+img:hover {
+    border: 2px groove #E4F0FE;
+    background: white;
+}
+
+
+img.Selected {
+    border: 2px groove #E4F0FE;
+}
+
+#savedCopyContainer {
+    display: none;
+}
+
+#savedCopyContainer img {
+    width: 250px;
+    height: 150px;
+}
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="height:2000px">
+    <div class="Toolbar"> <!-- Эта часть отвечает за палитру -->
+        <img src="Цвета/красный.png" alt="Красная кисть" onclick="changeColor('rgb(255,0,0)', 3, this)">
+        <img src="Цвета/оранжевый.png" alt="Оранжевый кисть" onclick="changeColor('rgb(255,165,0)', 3, this)">
+        <img src="Цвета/желтый.png" alt="Желтая кисть" onclick="changeColor('rgb(255,255,0)', 3, this)">
+        <img src="Цвета/зеленый.png" alt="Зеленая кисть" onclick="changeColor('rgb(0,255,0)', 3, this)"> 
+        <img src="Цвета/голубой.png" alt="Голубая кисть" onclick="changeColor('rgb(0,255,255)', 3, this)">
+        <img src="Цвета/синий.png" alt="Синяя кисть" onclick="changeColor('rgb(0,0,255)', 3, this)">
+        <img src="Цвета/фиолетовый.png" alt="Фиолетовая кисть" onclick="changeColor('rgb(255,0,255)', 3, this)">
+        <img src="Цвета/черный.png" alt="Черная кисть" onclick="changeColor('rgb(0,0,0)', 3, this)">
+        <img style="height: 40px;" src="Цвета/ластик.png" alt="Ластик" onclick="changeColor('rgb(255,255,255)', 9, this)">
+    
+    <div class="CanvasContainer"> <!-- Панель для рисования -->
+        <canvas id="drawingCanvas" width="500" height="300"></canvas>
+    </div>
+        <!-- Кнопки сохранить и очистить
+            Лучше видоизменить кнопку очистить, потому что она сильно похожа на кнопку сохранить -->
+        <button onclick="saveCanvas()">Сохранить</button>
+        <button onclick="clearCanvas()">Очистить</button>
+        <div id="savedCopyContainer"> <!-- Эта часть кода отображается при нажатии кнопки сохранить -->
+           <img id="savedImageCopy"><br>
+           Щелкните правой кнопкой мыши для сохранения ...
+        </div>
+</div>
+    <script>
+        var canvas;
+        var context;
+
+    window.onload = function() {
+        canvas = document.getElementById("drawingCanvas");
+        context = canvas.getContext("2d");  // создает контекст для рисования 2d картинки
+        context.lineWidth = 3;  // толщина маркера
+        
+        // требуемые для рисования события
+        canvas.onmousedown = startDrawing; // при нажатии на мышку
+        canvas.onmouseup = stopDrawing;  
+        canvas.onmouseout = stopDrawing;
+        canvas.onmousemove = draw; // при движении мышки
+    }
+
+   var previousColorElement;
+
+    function changeColor(color, thickness, imgElement)
+    {
+        // 	Меняем текущий цвет рисования и толщину (Для ластика толщина берется больше)
+        context.strokeStyle = color;
+        context.lineWidth = thickness;
+        
+        // Меняем стиль элемента <img>, по которому щелкнули
+        imgElement.className = "Selected";
+        
+        // Возвращаем ранее выбранный элемент <img> в нормальное состояние
+        if (previousColorElement != null)
+        previousColorElement.className = "";
+        
+        previousColorElement = imgElement;
+    }
+
+    function startDrawing(e) {
+        // Начинаем рисовать
+        isDrawing = true;
+        
+        // Создаем новый путь (с текущим цветом и толщиной линии) 
+        context.beginPath();
+        
+        // Нажатием левой кнопки мыши помещаем "кисть" на холст
+        context.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
+    }
+
+    function draw(e) {
+        if (isDrawing == true)
+        {
+            // Определяем текущие координаты указателя мыши
+            var x = e.pageX - canvas.offsetLeft;
+            var y = e.pageY - canvas.offsetTop;
+            
+            // Рисуем линию до новой координаты
+            context.lineTo(x, y);
+            context.stroke();
+        }
+    }
+
+    function stopDrawing() {
+        isDrawing = false;	
+    }
+
+    function clearCanvas() {  // очищает область заданную параметрами
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        var imageContainer = document.getElementById("savedCopyContainer");
+        imageContainer.style.display = "none";
+    }
+
+    var url = canvas.toDataURL("image/jpeg");
+
+    window.location = canvas.toDataURL();
+    function saveCanvas() {
+        // Находим элемент <img>
+        var imageCopy = document.getElementById("savedImageCopy");
+        
+        // Отображаем данные холста в элементе <img>
+        imageCopy.src = canvas.toDataURL();
+        
+        // Показываем элемент <div>, делая изображение видимым
+        // делая изображение видимым
+        var imageContainer = document.getElementById("savedCopyContainer");
+        imageContainer.style.display = "block";
+    }
+
+    </script>
+</body>
+</html>
