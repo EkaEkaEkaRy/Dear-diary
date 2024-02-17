@@ -51,6 +51,7 @@ while True:
         for i in range(len(s) - 1):
             if s[i + 1] not in ['.', ',', '!', '?', ':']:
                 answer += s[i]
+        answer += s[-1]
         print(answer)
     else:
         break
