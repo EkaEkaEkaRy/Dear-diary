@@ -1,0 +1,13 @@
+.chat_wrapper {
+    display: block;
+    height: 100%;
+}
+
+.header {
+    font-weight: 700;
+    font-size: 1em;
+}
+.textarea {
+    position: sticky;
+    top: 300px;
+}

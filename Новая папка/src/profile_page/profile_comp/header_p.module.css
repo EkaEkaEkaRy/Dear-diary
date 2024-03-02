@@ -1,0 +1,22 @@
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 60px;
+}
+
+.back {
+    position: absolute;
+    top: 11px;
+    left: 20px;
+}
+
+.arrow {
+    height: 40px;
+    width: auto;
+    border: none;
+}
+.back :hover {
+    border: none;
+  
+  }

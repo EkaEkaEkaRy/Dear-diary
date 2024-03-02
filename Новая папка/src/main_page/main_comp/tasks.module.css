@@ -1,0 +1,13 @@
+.header {
+    font-size: 1.5em;
+}
+.list_item {
+    margin: 3%;
+}
+.task_name {
+    font-weight: 700;
+    margin-bottom: 2%;
+}
+.disc {
+    margin-top: 2%;
+}
