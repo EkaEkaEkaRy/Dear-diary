@@ -2,13 +2,14 @@ const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const objectId = require("mongodb").ObjectId;
 
+const fs = require("fs");
 const spawn = require("child_process").spawn;
 const encoder = require("./cipher/encoder");
       
 const app = express();
 app.use(express.static("public"));  // статические файлы будут в папке public
 app.use(express.json());        // подключаем автоматический парсинг json
-    
+
 const mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
    
 (async () => {
@@ -153,12 +154,25 @@ app.post("/api/chat", async(req, res)=> {
        
     let answer;
     
-    const pythonProcess = spawn('python',["cipher/chat/file.py", userMessage]);
+    fs.truncate('cipher/chat/message.txt', err => {
+        if(err) throw err; // не удалось очистить файл
+        console.log('Файл успешно очищен');
+     });
+
+
+    fs.writeFile("cipher/chat/message.txt", "text", function(error){
+        if(error){  // если ошибка
+            return console.log(error);
+        }
+        console.log("Файл успешно записан");
+    });
+
+    const pythonProcess = spawn('python',["cipher/chat/file.py"]);
     pythonProcess.stdout.on('data', (data) => {
         answer = String(data);
     });
 
-    const chatMessage = answer;
+    const chatMessage = fs.readFile("cipher/chat/message.txt");
     const chatDate = currentDate;
     const chatIsSender = false;
     const chat_answer = {id_user: userMail, message: chatMessage, date: chatDate, sender: chatIsSender};

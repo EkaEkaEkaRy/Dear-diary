@@ -51,3 +51,9 @@ def chat_answer(a):
             answer += s[i]
     answer += s[-1]
     return answer
+
+if __name__ == '__main__':
+    file = open("message.txt", '+')
+    a = file.read()
+    file.truncate(0)
+    file.write(chat_answer(a))
