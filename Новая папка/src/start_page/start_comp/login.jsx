@@ -20,7 +20,7 @@ const LoginForm = () => {
                 <Input type="password" placeholder='Пароль'/>
                 <div>
                     <NavLink to="/Main">
-                        <input className={a.button} type="submit" value={"Войти"} />
+                        <input className={a.button} type="submit" value={"Войти"} disabled/>
                     </NavLink>
                 </div>
             </div>

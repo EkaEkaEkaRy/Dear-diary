@@ -36,6 +36,9 @@
 .draw {
     background-image: url("./nav_img/paint.png");
 }
+.exersice {
+    background-image: url("./nav_img/dumbbell.png");
+}
 .quest {
     background-image: url("./nav_img/question.png");
 }

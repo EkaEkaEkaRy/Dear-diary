@@ -1,5 +1,5 @@
 import d from "./drawing.module.css"
-
+import { React, Component } from "react"
 import red from "./colors/red.png"
 import orange from "./colors/orange.png"
 import yellow from "./colors/yellow.png"
@@ -10,9 +10,22 @@ import purple from "./colors/purple.png"
 import black from "./colors/black.png"
 import eraser from "./colors/eraser.png"
 
-
-
 /*
+class CanvasComponent extends React.Component {
+    componentDidMount() {
+        this.updateCanvas();
+    }
+    updateCanvas() {
+        const ctx = this.refs.canvas.getContext('2d');
+        ctx.fillRect(0,0, 100, 100);
+    }
+    render() {
+        return (
+            <canvas ref="canvas" width={300} height={300}/>
+        );
+    }
+}
+
 const Draw = () => {
     return (
         <div>

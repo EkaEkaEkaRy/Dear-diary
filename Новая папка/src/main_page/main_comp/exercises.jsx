@@ -1,4 +1,4 @@
-import t from './tasks.module.css'
+import t from './exercises.module.css'
 
 const exercises = [
     {

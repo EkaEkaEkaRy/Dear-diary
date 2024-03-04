@@ -7,8 +7,8 @@ const Main = () => {
   return (
     <div className={s.app_wrapper}>
       <Header className={s.header}/>
-      <main className={s.main}>
-        <Nav className={s.nav}/>
+      <main>
+        
         <Left />
       </main>
     </div>
