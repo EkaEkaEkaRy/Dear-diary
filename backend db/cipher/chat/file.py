@@ -15,7 +15,7 @@ class NeighborSampler(BaseEstimator):
         self.k = k
         self.temperature = temperature
 
-    def fit (self, X, y):
+    def fit(self, X, y):
         self.tree_ = BallTree(X)
         self.y_ = np.array(y)
 
@@ -34,7 +34,7 @@ vectorizer.fit(good.context_0)
 
 matrix_big = vectorizer.transform(good.context_0)
 
-svd = TruncatedSVD(n_components=1000)
+svd = TruncatedSVD(n_components=300)
 svd.fit(matrix_big)
 matrix_small = svd.transform(matrix_big)
 
@@ -52,8 +52,12 @@ def chat_answer(a):
     answer += s[-1]
     return answer
 
-if __name__ == '__main__':
-    file = open("message.txt", '+')
-    a = file.read()
-    file.truncate(0)
-    file.write(chat_answer(a))
+
+
+file = open("message.txt", 'r', encoding='utf-8')
+a = file.read()
+file.close()
+file = open("message.txt", 'w', encoding='utf-8')
+file.truncate(0)
+file.write(chat_answer(a))
+file.close()

@@ -140,6 +140,30 @@ app.get("/api/chat/:id", async(req, res) => {
   });
       
 let currentDate = new Date();
+
+function runPythonScript() {
+    return new Promise((resolve, reject) => {
+      const pythonProcess = spawn('python', ['.\\cipher\\chat\\file.py']);
+  
+      let output = '';
+      pythonProcess.stdout.on('data', (data) => {
+        output += data.toString();
+      });
+  
+      pythonProcess.on('close', (code) => {
+        if (code !== 0) {
+          return reject(new Error(`Python скрипт завершился с кодом ${code}`));
+        }
+        resolve(output);
+      });
+  
+      pythonProcess.stderr.on('data', (data) => {
+        reject(new Error(data));
+      });
+    });
+  }
+
+
 app.post("/api/chat", async(req, res)=> {
           
     if(!req.body) return res.sendStatus(400);
@@ -154,33 +178,37 @@ app.post("/api/chat", async(req, res)=> {
        
     let answer;
     
+    /*
     fs.truncate('cipher/chat/message.txt', err => {
         if(err) throw err; // не удалось очистить файл
         console.log('Файл успешно очищен');
      });
+     */
 
-
-    fs.writeFile("cipher/chat/message.txt", "text", function(error){
+    fs.writeFile("cipher/chat/message.txt", String(userMessage), function(error){
         if(error){  // если ошибка
             return console.log(error);
         }
         console.log("Файл успешно записан");
     });
+    
+    answer = runPythonScript()
+    console.log(answer)
 
-    const pythonProcess = spawn('python',["cipher/chat/file.py"]);
-    pythonProcess.stdout.on('data', (data) => {
-        answer = String(data);
-    });
-
-    const chatMessage = fs.readFile("cipher/chat/message.txt");
+    const chatMessage = "hello" //fs.readFile("cipher/chat/message.txt");
     const chatDate = currentDate;
     const chatIsSender = false;
     const chat_answer = {id_user: userMail, message: chatMessage, date: chatDate, sender: chatIsSender};
 
+
     try{
         await collection.insertOne(user);
-        await collection.insertOne(chat_answer);
         res.send(user);
+
+        
+        await collection.insertOne(chat_answer);
+        res.send(chat_answer);
+
     }
     catch(err){
         console.log(err);
