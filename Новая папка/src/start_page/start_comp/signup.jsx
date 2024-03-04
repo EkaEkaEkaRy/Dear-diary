@@ -8,7 +8,8 @@ const Input = (props) => {
         <div><input className={classes.input} type={type} placeholder={text} required /></div>
     )
 }
-const signup = () => {
+const Signup = () => {
+    
     return (
         <div className={classes.signup}>
             <form class="form_auth" action="#" method="post">
@@ -29,4 +30,4 @@ const signup = () => {
     )
 }
 
-export default signup
+export default Signup
