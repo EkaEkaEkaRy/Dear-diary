@@ -3,7 +3,7 @@ var BigInt = require("big-integer");
 exports.encoded = (password) => {
     let num_text = "";
     for (let i = 0; i < password.length; i++) {
-        //for (let j = 0; j < 8 - password.charCodeAt(i).toString().length; j++) num_text += "0";
+        for (let j = 0; j < 8 - password.charCodeAt(i).toString().length; j++) num_text += "0";
         num_text += password.charCodeAt(i);
     }
     let x = num_text
@@ -20,7 +20,7 @@ function PowMod(x, e, N) {
     {
         m = "";
         for (let j = 0; j < 8; j++) m += x[i*8 + j];
-        r += (F(Number(m), Number(e), Number(N)) % Number(N)).toString(16);
+        r += (F(BigInt(m), BigInt(e), BigInt(N)) % BigInt(N)).toString(16);
     }
     return r;
 }

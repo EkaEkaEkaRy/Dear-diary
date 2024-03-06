@@ -97,8 +97,7 @@ app.put("/api/users", async(req, res)=>{
           
     const collection = req.app.locals.collection.collection("users");
     try{
-        const id = new objectId(req.body.id);
-        const user = await collection.findOneAndUpdate({_id: id}, { $set: {name: userName, mail: userMail, password: userPassword, level: Number(userLevel)}},
+        const user = await collection.findOneAndUpdate({mail: userMail}, { $set: {name: userName, mail: userMail, password: userPassword, level: Number(userLevel)}},
          {returnDocument: "after" });
         if(user) res.send(user);
         else res.sendStatus(404);
@@ -261,28 +260,6 @@ app.post("/api/daily_tasks", async(req, res)=> {
     try{
         await collection.insertOne(user);
         res.send(user);
-    }
-    catch(err){
-        console.log(err);
-        res.sendStatus(500);
-    }
-});
-
-app.put("/api/daily_tasks", async(req, res)=>{
-           
-    if(!req.body) return res.sendStatus(400);
-    const userId = req.body.id_user;
-    const userQ = req.body.task;
-    const userA = req.body.message;
-    const userDate = currentDate;
-          
-    const collection = req.app.locals.collection.collection("daily_tasks");
-    try{
-        const id = new objectId(req.body.id);
-        const user = await collection.findOneAndUpdate({_id: id}, { $set: {id_user: userId, task: userQ, message: userA, date: userDate}},
-         {returnDocument: "after" });
-        if(user) res.send(user);
-        else res.sendStatus(404);
     }
     catch(err){
         console.log(err);
