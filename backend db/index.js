@@ -4,7 +4,7 @@ const objectId = require("mongodb").ObjectId;
 
 const fs = require("fs");
 const spawn = require("child_process").spawn;
-const encoder = require("./cipher/encoder");
+const encoder = require("./cipher/cipher/encoder");
       
 const app = express();
 app.use(express.static("public"));  // статические файлы будут в папке public
