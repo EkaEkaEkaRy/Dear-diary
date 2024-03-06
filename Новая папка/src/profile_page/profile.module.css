@@ -4,14 +4,13 @@
     font-family: "Andika", sans-serif;
     margin: auto;
     padding: 0;
-    height: 100vh;
+    height: 100%;
     background-color: #FFFDF9;
     font-size: 1.2em;
 }
 
 .main {
     padding: 70px 5%;
-    height: 100%;
     color: #081F5C;
 }
 

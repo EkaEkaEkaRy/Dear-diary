@@ -11,7 +11,7 @@ const Level = (props) => {
     return (
         <div className={l.level_wrapper}>
             <label htmlFor="progress" className={l.label}>
-                Ваш уровень {major}
+                Уровень {major}
             </label>
             <progress className={l.level} id="progress" min="0" max="1" value={minor}></progress>
             

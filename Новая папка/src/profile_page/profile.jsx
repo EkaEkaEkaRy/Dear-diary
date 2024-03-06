@@ -5,7 +5,7 @@ import Header from './profile_comp/header_p'
 import Person from './profile_comp/person'
 import Level from './profile_comp/level'
 import Settings from './profile_comp/settings'
-import Calendar from './profile_comp/calendar'
+import History from './profile_comp/history'
 import { useState } from 'react';
 
 
@@ -23,7 +23,7 @@ const Profile = (props) => {
                 <div className={p.content_wrapper}>
                     <div className={p.wrapper1}>
                         <Level scale={scale}/>
-                        
+                        <History />
                         
                     </div>
                     <div className={p.wrapper1}>

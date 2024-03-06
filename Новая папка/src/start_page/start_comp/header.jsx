@@ -1,9 +1,11 @@
-import a from "./header.module.css"
+
+import h from "./header.module.css"
 
 const header = () => {
     return (
-        <header className={a.header}>
-            <div>Твой <i>личный</i> дневник</div>
+        <header className={h.header}>
+            <div className={h.name}>SELFHELP - </div>
+            <div className={h.disc}>Твой личный дневник</div>
         </header>
     )
 }
