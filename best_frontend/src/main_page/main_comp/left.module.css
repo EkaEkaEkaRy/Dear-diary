@@ -1,8 +1,35 @@
 .main {
-    padding: 5% 5%;
-    height: 100%;
-    color: #081F5C;
+  @media (max-width: 480px) {
+    margin: 10% 5%;
+  }
+
+  @media (max-width: 768px) and (min-width: 481px) {
+    margin: 7% 5%;
+  }
+
+  @media (min-width: 768px) {
+    margin: 5% 5%;
+  }
+
+
+  color: #081F5C;
+
+  @media (max-width: 550px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 768px) and (min-width: 551px) {
+    display: grid;
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 5%;
+  }
+
+  @media (min-width: 768px) {
     display: grid;
     grid-template-columns: 33% 66%;
     grid-column-gap: 5%;
   }
+
+
+}

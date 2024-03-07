@@ -105,7 +105,7 @@ class Left extends Component {
                             <div className={s.list_item + ' ' + s.thoughts}><Input value={"Напиши свои мысли"} id="1" /></div>
                             <div className={s.list_item + ' ' + s.mood}><Input value={"Отметь свое настроение"} id="2" /></div>
                             <div className={s.list_item + ' ' + s.draw}><Input value={"Порисуй"} id="3" /></div>
-                            <div className={s.list_item + ' ' + s.music}><Input value={"Послушай расслабляющую музыку"} id="4" /></div>
+                            <div className={s.list_item + ' ' + s.music}><Input value={"Послушай музыку"} id="4" /></div>
                             <div className={s.list_item + ' ' + s.exersice}><Input value={"Выполни упражнения"} id="5" /></div>
                             <div className={s.list_item + ' ' + s.quest}><Input value={"Ответь на вопрос"} id="6" /></div>
                         </div>

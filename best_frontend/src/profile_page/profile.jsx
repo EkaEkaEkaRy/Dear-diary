@@ -17,7 +17,7 @@ const Profile = (props) => {
     
     return (
         <div className={p.app_wrapper}>
-            <Header />
+            <Header className={p.header}/>
             <main className={p.main}>
                 <Person name={name} />
                 <div className={p.content_wrapper}>

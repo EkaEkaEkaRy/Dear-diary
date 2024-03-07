@@ -5,6 +5,15 @@
 .header {
     font-weight: 700;
     font-size: 1.5em;
+    @media (max-width: 480px) {
+        font-size: 1.2em;
+    }
+    @media (min-width: 481px) and (max-width: 767px) {
+        font-size: 1.3em;
+    }
+    @media (min-width: 768px) {
+        font-size: 1.5em;
+    }
 }
 .main {
     margin-top: 4%;

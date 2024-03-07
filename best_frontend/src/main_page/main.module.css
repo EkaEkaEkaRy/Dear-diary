@@ -14,9 +14,7 @@
   padding: 5% 5%;
   height: 100%;
   color: #081F5C;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-column-gap: 5%;
+
 }
 a {
   color: #081F5C;
