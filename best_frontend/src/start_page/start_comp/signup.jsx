@@ -16,14 +16,14 @@ const Signup = () => {
 
     let name, value;
 
-    const handlerChange2 = (event) =>
+    const handlerChange = (event) =>
     {
         name = event.target.name;
         value = event.target.value;
         setuser({ ...user, [name]: value})
     }
 
-    const handlerSubmit2 = async (event) => {
+    const handlerSubmit = async (event) => {
             event.preventDefault();
             const {name, mail, password, password2} = user;
             if (password !== password2) console.log("пароли не совпадают");
@@ -45,13 +45,13 @@ const Signup = () => {
     };
     return (
         <div className={l.signup}>
-            <form class="form_auth" action="#" method="POST" name="userSignup" onSubmit={handlerSubmit2}>
+            <form class="form_auth" action="#" method="POST" name="userSignup" onSubmit={handlerSubmit}>
                 <div className={l.title}>Регистрация</div>
                 <div className={l.login_wrapper}>
-                    <div><input className={l.input} name="name" type="text" placeholder='Имя' value = {user.name} onChange={handlerChange2} required /></div>
-                    <div><input className={l.input} name="mail" type="email" placeholder='Почта' value = {user.mail} onChange={handlerChange2} required /></div>
-                    <div><input className={l.input} name="password" type="password" placeholder='Пароль' value = {user.password} onChange={handlerChange2} required /></div>
-                    <div><input className={l.input} name="password2" type="password" placeholder='Повторный пароль' value = {user.password2} onChange={handlerChange2} required /></div>
+                    <div><input className={l.input} name="name" type="text" placeholder='Имя' value = {user.name} onChange={handlerChange} required /></div>
+                    <div><input className={l.input} name="mail" type="email" placeholder='Почта' value = {user.mail} onChange={handlerChange} required /></div>
+                    <div><input className={l.input} name="password" type="password" placeholder='Пароль' value = {user.password} onChange={handlerChange} required /></div>
+                    <div><input className={l.input} name="password2" type="password" placeholder='Повторный пароль' value = {user.password2} onChange={handlerChange} required /></div>
                     <div>
                             <input className={l.button} type="submit" value={"Создать аккаунт"} />
 
