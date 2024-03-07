@@ -16,9 +16,8 @@ const Main = () => {
 
     return (
       <div className={s.app_wrapper}>
-        <Header className={s.header} />
+        <Header className={s.header} name="Name"/> // здесь я передаю имя пользователя в компонент header в качестве props
         <main>
-
           <Left />
         </main>
       </div>
