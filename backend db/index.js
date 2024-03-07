@@ -2,9 +2,8 @@ const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const objectId = require("mongodb").ObjectId;
 
-const fs = require("fs");
-const spawn = require("child_process").spawn;
 const encoder = require("./cipher/cipher/encoder");
+//const ReturnUserAnswer = require("./cipher/chat/chatAnswer")
       
 const app = express();
 app.use(express.static("public"));  // статические файлы будут в папке public
@@ -50,21 +49,26 @@ app.get("/api/users/:id", async(req, res) => {
   }
   });
       
-app.post("/api/users", async(req, res)=> {
+  app.post("/api/users", async(req, res)=> {
           
+    const {name, mail, password} = req.body;
     if(!req.body) return res.sendStatus(400);
           
-    const userName = req.body.name;
-    const userMail = req.body.mail;
-    const userPassword = encoder.encoded(req.body.password);
+    const userName = name;
+    const userMail = mail;
+    const userPassword = encoder.encoded(password);
     const userLevel = 0;
     const user = {name: userName, mail: userMail, password: userPassword, level: userLevel};
           
     const collection = req.app.locals.collection.collection("users");
        
     try{
-        await collection.insertOne(user);
-        res.send(user);
+        const username = await collection.findOne({mail: mail})
+        if (username) return res.status(400) 
+        else {
+            await collection.insertOne(user);
+            res.send(user);
+        }
     }
     catch(err){
         console.log(err);
@@ -92,7 +96,7 @@ app.put("/api/users", async(req, res)=>{
     if(!req.body) return res.sendStatus(400);
     const userName = req.body.name;
     const userMail = req.body.mail;
-    const userPassword = req.body.password;
+    const userPassword = encoder.encoded(req.body.password);
     const userLevel = req.body.level;
           
     const collection = req.app.locals.collection.collection("users");
@@ -140,27 +144,7 @@ app.get("/api/chat/:id", async(req, res) => {
       
 let currentDate = new Date();
 
-function runPythonScript() {
-    return new Promise((resolve, reject) => {
-      const pythonProcess = spawn('python', ['.\\cipher\\chat\\file.py']);
-  
-      let output = '';
-      pythonProcess.stdout.on('data', (data) => {
-        output += data.toString();
-      });
-  
-      pythonProcess.on('close', (code) => {
-        if (code !== 0) {
-          return reject(new Error(`Python скрипт завершился с кодом ${code}`));
-        }
-        resolve(output);
-      });
-  
-      pythonProcess.stderr.on('data', (data) => {
-        reject(new Error(data));
-      });
-    });
-  }
+//console.log(ReturnUserAnswer.UserAnswer("Как дела?"))
 
 
 app.post("/api/chat", async(req, res)=> {
@@ -175,26 +159,8 @@ app.post("/api/chat", async(req, res)=> {
           
     const collection = req.app.locals.collection.collection("chat");
        
-    let answer;
-    
-    /*
-    fs.truncate('cipher/chat/message.txt', err => {
-        if(err) throw err; // не удалось очистить файл
-        console.log('Файл успешно очищен');
-     });
-     */
 
-    fs.writeFile("cipher/chat/message.txt", String(userMessage), function(error){
-        if(error){  // если ошибка
-            return console.log(error);
-        }
-        console.log("Файл успешно записан");
-    });
-    
-    answer = runPythonScript()
-    console.log(answer)
-
-    const chatMessage = "hello" //fs.readFile("cipher/chat/message.txt");
+    const chatMessage = "hello"
     const chatDate = currentDate;
     const chatIsSender = false;
     const chat_answer = {id_user: userMail, message: chatMessage, date: chatDate, sender: chatIsSender};
