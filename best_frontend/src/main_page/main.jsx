@@ -14,10 +14,6 @@ const Main = () => {
     }
   }, []);
 
-  if (!authenticated) {
-    return <Navigate replace to='/start' />;
-  }
-  else {
     return (
       <div className={s.app_wrapper}>
         <Header className={s.header} />
@@ -28,6 +24,5 @@ const Main = () => {
       </div>
     )
   }
-}
 
 export default Main

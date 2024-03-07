@@ -12,9 +12,6 @@ const LoginForm = () => {
 
     let name, value;
 
-    const [authenticated, setauthenticated] = useState(
-        localStorage.getItem(localStorage.getItem("authenticated") || false));
-
 
     const handlerChange = (event) => {
         name = event.target.name;
@@ -39,8 +36,6 @@ const LoginForm = () => {
                     if (password !== user.password) console.log('Неправильный пароль');
                     else {
                         console.log("правильно");
-                        setauthenticated(true)
-                        localStorage.setItem("authenticated", true);
                     }
                 }
             });
