@@ -1,6 +1,6 @@
 import Text from './thoughts'
 import Mood from "./mood"
-import Draw from "./drawing"
+import Draw from "./draw"
 import Chat from './chat'
 import Music from './music'
 import Exer from './exercises'

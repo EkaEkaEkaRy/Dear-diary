@@ -1,15 +1,17 @@
+.header {
+    font-size: 1.5em;
+}
 .body {
     background: white;
-    height:2000px
 }
-
+/*
 .Toolbar {
     float: left;
     font-family: 'Trebuchet MS'; 
     font-size: 14px;
     font-variant: small-caps;
     text-align: center;
-    background: #F2F7FE;
+    background: #ffffff;
     padding: 10px 15px 3px 10px;
     margin-bottom: 1px;
     margin-right: 1px;
@@ -30,10 +32,8 @@
 
 canvas {
     border: 1px solid #7B899B;
-    width: 500;
-    height: 300;
 }
-/* обрати внимание, img нужно будет заменить на что-то другое (сменить назкание) */
+// обрати внимание, img нужно будет заменить на что-то другое (сменить назкание) 
 img {   
     padding: 2px;
     border: 2px solid #F2F7FE;
@@ -58,4 +58,4 @@ img.Selected {
 #savedCopyContainer img {
     width: 250px;
     height: 150px;
-}
+}*/
