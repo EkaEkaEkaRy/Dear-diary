@@ -1,0 +1,25 @@
+.music_wrapper {
+    display: block;
+    height: 100%;
+}
+
+.header {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+.playlists {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 6%;
+}
+.cover {
+    display: flex;
+    flex-direction: column;
+    column-gap: 10%;
+    margin-bottom: 30px;
+}
+.img {
+    width: 15em;
+    height: auto;
+    border-radius: 1em;
+}

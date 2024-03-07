@@ -1,0 +1,22 @@
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60px;
+}
+.profile {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+  border: none;
+}
+.ava {
+  height: 40px;
+  width: auto;
+  border: none;
+
+}
+.profile :hover {
+  border: none;
+
+}
