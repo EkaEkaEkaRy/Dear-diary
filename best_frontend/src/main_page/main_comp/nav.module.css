@@ -24,13 +24,13 @@
     padding: 10px 30px;
 }
 .thoughts {
-    background-image: url("./nav_img/write.png");
+    background-image: url("./nav_img/book.png");
 }
 .music {
     background-image: url("./nav_img/music.png");
 }
 .mood {
-    background-image: url("./nav_img/emotions.png");
+    background-image: url("./nav_img/good-review.png");
 }
 .draw {
     background-image: url("./nav_img/paint.png");
@@ -59,4 +59,22 @@
 }
 .list_item:hover .button{
     color: #FFFDF9;
+}
+.thoughts:hover {
+    background-image: url("./nav_img/book_hover.png");
+}
+.music:hover {
+    background-image: url("./nav_img/music_hover.png");
+}
+.mood:hover {
+    background-image: url("./nav_img/good-review_hover.png");
+}
+.draw:hover {
+    background-image: url("./nav_img/paint_hover.png");
+}
+.exersice:hover {
+    background-image: url("./nav_img/dumbbell_hover.png");
+}
+.quest:hover {
+    background-image: url("./nav_img/question_hover.png");
 }
