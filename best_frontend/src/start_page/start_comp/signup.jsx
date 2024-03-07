@@ -24,9 +24,10 @@ const Signup = () => {
     }
 
     const handlerSubmit = async (event) => {
-            event.preventDefault();
-            const {name, mail, password, password2} = user;
-            if (password !== password2) console.log("пароли не совпадают");
+        event.preventDefault();
+        const {name, mail, password, password2} = user;
+        if (password !== password2) console.log("пароли не совпадают");
+        else {
             const res = await fetch('http://localhost:1337/api/users', {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type":
@@ -42,6 +43,8 @@ const Signup = () => {
             setauthenticated(true)
             localStorage.setItem("authenticated", true);
             navigate("/Main");
+            }
+            
     };
     return (
         <div className={l.signup}>
