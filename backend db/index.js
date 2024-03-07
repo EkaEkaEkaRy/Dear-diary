@@ -119,6 +119,21 @@ app.put("/api/users", async(req, res)=>{
         res.sendStatus(500);
     }
 });
+
+app.get("/api/login", async(req, res) => {
+           
+    const collection = req.app.locals.collection.collection("users");
+    try{
+        const users = await collection.find({}).toArray();
+        res.send(users);
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }  
+});
+
+
  
 
 /////////////////////////////////////////////////////////////////////
