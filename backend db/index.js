@@ -133,7 +133,29 @@ app.get("/api/login", async(req, res) => {
     }  
 });
 
-
+app.post("/api/login", async(req, res)=> {
+          
+    const {mail, password} = req.body;
+    if(!req.body) return res.sendStatus(400);
+          
+    const userMail = mail;
+    const userPassword = encoder.encoded(password);
+    
+    const collection = req.app.locals.collection.collection("users");
+       
+    try{
+        const username = await collection.findOne({mail: userMail})
+        if (!username) return res.status(400) 
+        else {
+            if (username.password !== userPassword) return res.status(400)
+            res.send(user);
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
  
 
 /////////////////////////////////////////////////////////////////////
