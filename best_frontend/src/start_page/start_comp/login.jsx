@@ -1,63 +1,53 @@
 /*import Main from "../../main_page/main"*/
-import { Link, NavLink } from "react-router-dom"
 import {useState} from "react";
 
 import a from "./login.module.css"
 
-const Input = (props) => {
-    var type = props.type;
-    var text = props.placeholder;
-    return (
-        <div><input className={a.input} type={type} placeholder={text} required/></div>
-    )
-}
 const LoginForm = () => {
 
     let [user, setuser] = useState({
-        name: "",
         mail: "",
         password: ""
     })
 
     let name, value;
 
+    
     const handlerChange = (event) =>
     {
-        console.log(1);
         name = event.target.name;
-        console.log(name);
         value = event.target.value;
-        console.log(value);
         setuser({ ...user, [name]: value})
     }
 
     const handlerSubmit = async (event) => {
-            event.preventDefault();
-            const {name, mail, password} = user;
-            const res = await fetch('http://localhost:1337/api/users', {
-                method: "POST",
-                headers: { "Accept": "application/json", "Content-Type":
-                "application/json" },
-                body: JSON.stringify({
-                name,
-                mail,
-                password,
-                })
+        event.preventDefault();
+        const {mail, password} = user;
+        const response = await fetch("http://localhost:1337/api/users", {
+            method: "GET",
+            headers: { "Accept": "application/json" }
             });
-            const data = res.json();
-            if (res.status === 400 || !data) console.log("error")
+            // если запрос прошел нормально
+            if (response.ok === true) {
+            // получаем данные
+            const users = await response.json();
+            users.forEach(user => {
+                console.log(user.mail)
+                if (mail === user.mail) if (password !== user.password) console.log('Неправильный пароль'); else console.log("правильно");
+            });
+            console.log("Пользователь не найден")
+            }
     };
     return (
         <div className={a.signup}>
             <form className={a.login} action="#" method="POST" name="userSignup" onSubmit={handlerSubmit}>
             <div className={a.title}>Вход</div>
             <div className={a.login_wrapper}>
-                <div><input className={a.input} name="mail" type = "text" placeholder='Почта' onChange={handlerChange} required/></div>
-                <div><input className={a.input} name="password" type="password" placeholder='Пароль' onChange={handlerChange} required/></div>
+                <div><input className={a.input} name="mail" type = "text" placeholder='Почта' value={user.mail} onChange={handlerChange} required/></div>
+                <div><input className={a.input} name="password" type="password" placeholder='Пароль' value={user.password} onChange={handlerChange} required/></div>
                 <div>
-                    <NavLink to="/Main">
+
                         <input className={a.button} type="submit" value={"Войти"}/>
-                    </NavLink>
                 </div>
             </div>
         </form>
