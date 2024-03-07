@@ -1,9 +1,14 @@
 /*import Main from "../../main_page/main"*/
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import a from "./login.module.css"
 
 const LoginForm = () => {
+
+    const navigate = useNavigate();
+    const [authenticated, setauthenticated] = useState(
+        localStorage.getItem(localStorage.getItem("authenticated") || false));
+
 
     let [user, setuser] = useState({
         mail: "",
@@ -21,27 +26,26 @@ const LoginForm = () => {
 
     const handlerSubmit = async (event) => {
         event.preventDefault();
-        const { mail, password } = user;
-        const response = await fetch("http://localhost:1337/api/users", {
-            method: "GET",
-            headers: { "Accept": "application/json" }
+        const {mail, password} = user;
+        const res = await fetch('http://localhost:1337/api/login', {
+            method: "POST",
+            headers: { "Accept": "application/json", "Content-Type":
+            "application/json" },
+            body: JSON.stringify({
+            mail,
+            password,
+            })
         });
-        // если запрос прошел нормально
-        if (response.ok === true) {
-            // получаем данные
-            const users = await response.json();
-            users.forEach(user => {
-                console.log(user.mail)
-                if (mail === user.mail) {
-                    if (password !== user.password) console.log('Неправильный пароль');
-                    else {
-                        console.log("правильно");
-                    }
-                }
-            });
-            console.log("Пользователь не найден")
-        }
+        const data = res.json();
+        if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
+        else if (res.status === 402) console.log("неверный пароль")
+            setauthenticated(true)
+            localStorage.setItem("authenticated", true);
+            navigate("/Main");
+
+        
     };
+
     return (
         <div className={a.signup}>
             <form className={a.login} action="#" method="POST" name="userSignup" onSubmit={handlerSubmit}>
