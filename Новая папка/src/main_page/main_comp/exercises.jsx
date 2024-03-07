@@ -1,4 +1,7 @@
 import t from './exercises.module.css'
+import cover1 from './exer_covers/cover1.PNG'
+import cover2 from './exer_covers/cover2.PNG'
+import cover4 from './exer_covers/cover4.PNG'
 
 const exercises = [
     {
@@ -12,7 +15,8 @@ const exercises = [
             "Сосредоточение на тепле в области брюшной полости: «Мое солнечное сплетение несет тепло».",
             "Пассивная концентрация на прохладе, исходящей из области черепа: «Мой лоб прохладный»."
         ],
-        link: 'https://www.youtube.com/watch?v=tuGz7eGgRCA'
+        link: 'https://www.youtube.com/watch?v=tuGz7eGgRCA',
+        cover: cover1
     },
     {
         name: 'Прогрессивное расслабление мышц',
@@ -36,7 +40,8 @@ const exercises = [
         exer: [
             "Встаньте на пол босиком или в удобной обуви. Начните трясти кистями рук, постепенно включая в работу локти, плечи, корпус, голову, ноги. Можно немного потопать ногами по полу. Тряска должна быть интенсивной, чтобы «включилось» все тело."
         ],
-        link: 'https://www.youtube.com/watch?v=9_t4BgPuEMM'
+        link: 'https://www.youtube.com/watch?v=9_t4BgPuEMM',
+        cover: cover4
     },
     {
         name: '«Упражнение «Пять чувств»',
