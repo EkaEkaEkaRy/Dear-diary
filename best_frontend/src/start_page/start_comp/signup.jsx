@@ -1,36 +1,27 @@
-import { Link, NavLink } from "react-router-dom"
 import l from "./login.module.css"
 import {useState} from "react";
 
-const Input = (props) => {
-    var type = props.type;
-    var text = props.placeholder;
-    return (
-        <div><input className={l.input} type={type} placeholder={text} required /></div>
-    )
-}
 const Signup = () => {
     let [user, setuser] = useState({
         name: "",
         mail: "",
-        password: ""
+        password: "",
+        password2: "",
     })
 
     let name, value;
 
     const handlerChange = (event) =>
     {
-        console.log(1);
         name = event.target.name;
-        console.log(name);
         value = event.target.value;
-        console.log(value);
         setuser({ ...user, [name]: value})
     }
 
     const handlerSubmit = async (event) => {
             event.preventDefault();
-            const {name, mail, password} = user;
+            const {name, mail, password, password2} = user;
+            if (password !== password2) console.log("пароли не совпадают");
             const res = await fetch('http://localhost:1337/api/users', {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type":
@@ -42,7 +33,8 @@ const Signup = () => {
                 })
             });
             const data = res.json();
-            if (res.status === 400 || !data) console.log("error")
+            if (res.status === 400 || !data) console.log("пользователь уже существует")
+            
     };
     return (
         <div className={l.signup}>
@@ -52,11 +44,10 @@ const Signup = () => {
                     <div><input className={l.input} name="name" type="text" placeholder='Имя' value = {user.name} onChange={handlerChange} required /></div>
                     <div><input className={l.input} name="mail" type="email" placeholder='Почта' value = {user.mail} onChange={handlerChange} required /></div>
                     <div><input className={l.input} name="password" type="password" placeholder='Пароль' value = {user.password} onChange={handlerChange} required /></div>
-                    <div><input className={l.input} type="password" placeholder='Повторный пароль' required /></div>
+                    <div><input className={l.input} name="password2" type="password" placeholder='Повторный пароль' value = {user.password2} onChange={handlerChange} required /></div>
                     <div>
-                        <NavLink to="/Main">
                             <input className={l.button} type="submit" value={"Создать аккаунт"} />
-                        </NavLink>
+
                     </div>
                 </div>
             </form>
