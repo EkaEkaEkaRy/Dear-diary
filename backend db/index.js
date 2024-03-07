@@ -1,7 +1,7 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const objectId = require("mongodb").ObjectId;
-
+var currentDate = new Date();
 
 const encoder = require("./cipher/cipher/encoder");
 //const ReturnUserAnswer = require("./cipher/chat/chatAnswer")
