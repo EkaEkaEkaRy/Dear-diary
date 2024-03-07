@@ -5,6 +5,7 @@ import cover2 from './covers/cover2.PNG'
 import cover3 from './covers/cover3.PNG'
 import cover4 from './covers/cover4.PNG'
 import cover5 from './covers/cover5.PNG'
+import cover6 from './covers/cover6.PNG'
 
 const playlistst = [
     {
@@ -31,6 +32,11 @@ const playlistst = [
         name: "Звук дождя",
         link: "https://www.youtube.com/watch?v=vTUmcpQkYbU&pp=ygUNbmF0dXJlIHNvdW5kcw%3D%3D",
         img: cover5
+    },
+    {
+        name: "Спокойный Lofi",
+        link: "https://www.youtube.com/watch?v=YO6sEcc_C5w",
+        img: cover6
     }
 ]
 const Music = () => {

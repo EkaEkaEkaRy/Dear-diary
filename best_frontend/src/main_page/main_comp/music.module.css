@@ -1,6 +1,6 @@
 .music_wrapper {
     display: block;
-    height: 100%;
+    width: 100%;
 }
 
 .header {
@@ -9,7 +9,7 @@
 }
 .playlists {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 33% 33% 33%;
     margin-top: 6%;
 }
 .cover {
@@ -19,7 +19,7 @@
     margin-bottom: 30px;
 }
 .img {
-    width: 15em;
+    width: 80%;
     height: auto;
     border-radius: 1em;
 }
