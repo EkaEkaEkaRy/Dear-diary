@@ -1,7 +1,11 @@
 import t from './exercises.module.css'
 import cover1 from './exer_covers/cover1.PNG'
 import cover2 from './exer_covers/cover2.PNG'
+import cover3 from './exer_covers/cover3.PNG'
 import cover4 from './exer_covers/cover4.PNG'
+import cover5 from './exer_covers/cover5.PNG'
+import { Link } from 'react-router-dom'
+
 
 const exercises = [
     {
@@ -24,7 +28,8 @@ const exercises = [
         exer: [
             "Суть упражнения в том, чтобы последовательно напрягать и расслаблять следующие участки своего тела в течение 10-20 секунд: плечи, живот, ноги, руки, лоб, глаза (зажмуривание), шея.",
         ],
-        link: 'https://www.youtube.com/watch?v=Ra8qyuGDdWE'
+        link: 'https://www.youtube.com/watch?v=Ra8qyuGDdWE',
+        cover: cover2
     },
     {
         name: 'Визуализация',
@@ -32,7 +37,8 @@ const exercises = [
         exer: [
             "Суть упражнения в том, чтобы последовательно напрягать и расслаблять следующие участки своего тела в течение 10-20 секунд: плечи, живот, ноги, руки, лоб, глаза (зажмуривание), шея. Чтобы расслабиться, задействуйте как можно больше чувств. Например, если представляете себя на берегу океана, фокусируйтесь на звуках, запахах и даже на телесных и вкусовых ощущениях."
         ],
-        link: 'https://www.youtube.com/watch?v=F273YceMzT8'
+        link: 'https://www.youtube.com/watch?v=F273YceMzT8',
+        cover: cover3
     },
     {
         name: 'Техника «Тряска»',
@@ -44,12 +50,13 @@ const exercises = [
         cover: cover4
     },
     {
-        name: '«Упражнение «Пять чувств»',
+        name: 'Упражнение «Пять чувств»',
         disc: "Это очень простое и эффективное упражнение для переключения из одного эмоционального состояния на другое. Оно поможет вернуться в «здесь и сейчас» и снизит стресс",
         exer: [
             "В момент, когда чувствуете напряжение, беспокойство или гнев, отметьте вокруг себя: 5 предметов, которые вы можете рассмотреть; 4 звука, которые вы слышите; 3 предмета с разной фактурой, к которым можно прикоснуться; 2 запаха, которые вы можете ощущать; 1 вкус, который вы можете попробовать."
         ],
-        link: 'https://www.youtube.com/watch?v=qO_uetXEhKQ'
+        link: 'https://www.youtube.com/watch?v=qO_uetXEhKQ',
+        cover: cover5
     },
 ]
 
@@ -72,6 +79,8 @@ const Tasks = () => {
                         })
                     }
                 </ul>
+                <div><Link to={exercises[r].link} target='blanc'><img src={exercises[r].cover} className={t.img}/></Link></div>
+                <div>Чтобы лучше понять упражнение, можешь посмотреть видео с объясненем техники</div>
 
 
             </main>
