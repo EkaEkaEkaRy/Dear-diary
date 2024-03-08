@@ -72,7 +72,7 @@ app.get("/api/users/:id", async(req, res) => {
        
     try{
         const username = await collection.findOne({mail: mail})
-        if (username) return res.status(400) 
+        if (username) return res.sendStatus(404) 
         else {
             await collection.insertOne(user);
             res.send(user);
@@ -145,9 +145,9 @@ app.post("/api/login", async(req, res)=> {
        
     try{
         const username = await collection.findOne({mail: userMail})
-        if (!username) return res.status(400) 
+        if (!username) return res.sendStatus(404) 
         else {
-            if (username.password !== userPassword) return res.status(400)
+            if (username.password !== userPassword) return res.sendStatus(400)
             res.send(user);
         }
     }
