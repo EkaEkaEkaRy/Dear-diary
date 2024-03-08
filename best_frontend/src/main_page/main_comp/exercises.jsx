@@ -64,18 +64,19 @@ var r = Math.floor(Math.random() * exercises.length);
 const Tasks = () => {
     let id_user = localStorage.getItem('userMailId')
     const editUserLevel = async () => {
-        const res = await fetch('http://localhost:1337/api/login', {
-            method: "PUT",
-            headers: { "Accept": "application/json", "Content-Type":
-            "application/json" },
-            body: JSON.stringify({
-            id_user,
-            })
-        });
-        const data = res.json();
-        if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
-        else if (res.status === 402) console.log("неверный пароль")
-         
+        if (id_user !== 'unknown_user') {
+            const res = await fetch('http://localhost:1337/api/login', {
+                method: "PUT",
+                headers: { "Accept": "application/json", "Content-Type":
+                "application/json" },
+                body: JSON.stringify({
+                id_user,
+                })
+            });
+            const data = res.json();
+            if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
+            else if (res.status === 402) console.log("неверный пароль")
+        }   
     }
     
     

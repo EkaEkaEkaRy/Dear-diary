@@ -112,10 +112,12 @@ const Mood = () => {
 
     const handlerSubmit = async (event) => {
         event.preventDefault();
+        if (user.id_user !== 'unknown_user') {
             postUserTasks();
             editUserLevel();
             const form = document.forms["userTask"];
             form.reset();
+        }
     }
 
     return (

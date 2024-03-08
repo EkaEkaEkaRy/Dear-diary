@@ -93,8 +93,10 @@ const Quest = () => {
 
     const handlerSubmit = async (event) => {
         event.preventDefault();
-        postUserTasks();
-        editUserLevel();
+        if (user.id_user !== 'unknown_user') {
+            postUserTasks();
+            editUserLevel();
+        }
     }
 
     return (
