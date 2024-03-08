@@ -1,4 +1,5 @@
 import q from './questions.module.css'
+import {useState} from "react";
 
 const qwests = [
     "Кто всегда делает твой день лучше?",
@@ -35,8 +36,46 @@ const qwests = [
     "Что ты больше всего любил(а) делать в дестве?",
 ];
 
+var r = Math.floor(Math.random() * qwests.length);
+
 const Quest = () => {
-    var r = Math.floor(Math.random() * qwests.length);
+    
+
+    let [user, setuser] = useState({
+        id_user: localStorage.getItem('userMailId'),
+        task: qwests[r],
+        message: "",
+    })
+
+    let name, value;
+
+    const handlerChange = (event) =>
+    {
+        name = 'message';
+        value = event.target.value;
+        setuser({ ...user, [name]: value})
+    }
+
+    const handlerSubmit = async (event) => {
+        event.preventDefault();
+        const {id_user, task, message} = user;
+        setuser({ ...user, ['message']: ""});
+            if (id_user !== "unknown_user") {
+            const res = await fetch('http://localhost:1337/api/daily_tasks', {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type":
+                "application/json" },
+                body: JSON.stringify({
+                id_user,
+                task,
+                message,
+                })
+            });
+            const data = res.json();
+            if (res.status === 400 || !data) console.log("пользователь уже существует")
+        }
+    }
+
     return (
         <div className={q.q_wrapper}>
             <header className={q.header}>
@@ -46,8 +85,8 @@ const Quest = () => {
                 <div className={q.question}>
                     <i>{qwests[r]}</i>
                 </div>
-                <form className={q.form}>
-                    <textarea className={q.text} placeholder='Введи свой ответ сюда' minlength="1" required>
+                <form className={q.form} method="POST" name="userTask" onSubmit={handlerSubmit}>
+                    <textarea className={q.text} placeholder='Введи свой ответ сюда' minlength="1" value = {user.message} onChange={handlerChange} required>
                     </textarea>
                     <div className={q.ps}>Чтобы изменить размер текстового поля, потяни за правый нижний угол</div>
                     <input className={q.button} type="submit" value={"Отправить"} />
