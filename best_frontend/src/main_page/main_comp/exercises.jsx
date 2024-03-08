@@ -59,9 +59,26 @@ const exercises = [
         cover: cover5
     },
 ]
+var r = Math.floor(Math.random() * exercises.length);
 
 const Tasks = () => {
-    var r = Math.floor(Math.random() * exercises.length);
+    let id_user = localStorage.getItem('userMailId')
+    const editUserLevel = async () => {
+        const res = await fetch('http://localhost:1337/api/login', {
+            method: "PUT",
+            headers: { "Accept": "application/json", "Content-Type":
+            "application/json" },
+            body: JSON.stringify({
+            id_user,
+            })
+        });
+        const data = res.json();
+        if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
+        else if (res.status === 402) console.log("неверный пароль")
+         
+    }
+    
+    
     return (
         <div className={t.tasks_wrapper}>
             <header className={t.header}>
@@ -80,7 +97,7 @@ const Tasks = () => {
                     }
                 </ul>
                 <div></div>
-                <div><Link to={exercises[r].link} target='blanc'><img src={exercises[r].cover} className={t.img}/></Link></div>
+                <div onClick={editUserLevel}><Link to={exercises[r].link} target='blanc'><img src={exercises[r].cover} className={t.img}/></Link></div>
                 <div>Чтобы лучше понять упражнение, можешь посмотреть видео с объясненем техники</div>
 
 

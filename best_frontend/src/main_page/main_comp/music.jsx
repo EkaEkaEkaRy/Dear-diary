@@ -40,6 +40,23 @@ const playlistst = [
     }
 ]
 const Music = () => {
+
+    let id_user = localStorage.getItem('userMailId')
+    const editUserLevel = async () => {
+        const res = await fetch('http://localhost:1337/api/login', {
+            method: "PUT",
+            headers: { "Accept": "application/json", "Content-Type":
+            "application/json" },
+            body: JSON.stringify({
+            id_user,
+            })
+        });
+        const data = res.json();
+        if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
+        else if (res.status === 402) console.log("неверный пароль")
+         
+    }
+
     return (
         <div className={m.music_wrapper}>
             <header className={m.header}>
@@ -50,7 +67,7 @@ const Music = () => {
                     playlistst.map(pl => {
                         return (
                             <div key={pl.id} >
-                                <div className={m.cover}>
+                                <div className={m.cover} onClick={editUserLevel}>
                                     <Link to={pl.link} target='blanc'>
                                         <img src={pl.img} className={m.img}/>
                                         <div>{pl.name}</div></Link>
