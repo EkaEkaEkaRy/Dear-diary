@@ -115,9 +115,9 @@ const Mood = () => {
         if (user.id_user !== 'unknown_user') {
             postUserTasks();
             editUserLevel();
-            const form = document.forms["userTask"];
-            form.reset();
         }
+        const form = document.forms["userTask"];
+        form.reset();
     }
 
     return (

@@ -50,7 +50,7 @@ const Quest = () => {
         const {id_user, task, message} = user;
         setuser({ ...user, ['message']: ""});
         r = Math.floor(Math.random() * qwests.length);
-            if (id_user !== "unknown_user") {
+
             const res = await fetch('http://localhost:1337/api/daily_tasks', {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type":
@@ -63,7 +63,6 @@ const Quest = () => {
             });
             const data = res.json();
             if (res.status === 400 || !data) console.log("пользователь уже существует")
-        }
     }
 
     const editUserLevel = async () => {
@@ -97,6 +96,11 @@ const Quest = () => {
             postUserTasks();
             editUserLevel();
         }
+        else {
+            setuser({ ...user, ['message']: ""});
+            r = Math.floor(Math.random() * qwests.length);
+        }
+        
     }
 
     return (

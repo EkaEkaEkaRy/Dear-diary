@@ -58,6 +58,7 @@ const Text = () => {
             postUserTasks();
             editUserLevel();
         }
+        else setuser({ ...user, ['message']: ""});
     }
 
     return (
