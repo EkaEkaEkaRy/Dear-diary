@@ -1,5 +1,7 @@
 import t from './thoughts.module.css'
 import {useState} from "react";
+
+
 const Text = () => {
 
     let [user, setuser] = useState({
@@ -7,6 +9,39 @@ const Text = () => {
         task: "Ваши мысли",
         message: "",
     })
+
+    const postUserTasks = async () => {
+        const {id_user, task, message} = user;
+        setuser({ ...user, ['message']: ""});
+        const res = await fetch('http://localhost:1337/api/daily_tasks', {
+                    method: "POST",
+                    headers: { "Accept": "application/json", "Content-Type":
+                    "application/json" },
+                    body: JSON.stringify({
+                    id_user,
+                    task,
+                    message,
+                    })
+                });
+                const data = res.json();
+                if (res.status === 400 || !data) console.log("пользователь уже существует")
+    }
+
+    const editUserLevel = async () => {
+        const {id_user, task, message} = user;
+        const res = await fetch('http://localhost:1337/api/login', {
+            method: "PUT",
+            headers: { "Accept": "application/json", "Content-Type":
+            "application/json" },
+            body: JSON.stringify({
+            id_user,
+            })
+        });
+        const data = res.json();
+        if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
+        else if (res.status === 402) console.log("неверный пароль")
+         
+    }
 
     let name, value;
 
@@ -19,22 +54,8 @@ const Text = () => {
 
     const handlerSubmit = async (event) => {
         event.preventDefault();
-        const {id_user, task, message} = user;
-        setuser({ ...user, ['message']: ""});
-            if (id_user !== "unknown_user") {
-            const res = await fetch('http://localhost:1337/api/daily_tasks', {
-                method: "POST",
-                headers: { "Accept": "application/json", "Content-Type":
-                "application/json" },
-                body: JSON.stringify({
-                id_user,
-                task,
-                message,
-                })
-            });
-            const data = res.json();
-            if (res.status === 400 || !data) console.log("пользователь уже существует")
-        }
+        postUserTasks();
+        editUserLevel();
     }
 
     return (

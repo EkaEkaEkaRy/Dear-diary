@@ -39,7 +39,6 @@ const qwests = [
 var r = Math.floor(Math.random() * qwests.length);
 
 const Quest = () => {
-    
 
     let [user, setuser] = useState({
         id_user: localStorage.getItem('userMailId'),
@@ -47,17 +46,7 @@ const Quest = () => {
         message: "",
     })
 
-    let name, value;
-
-    const handlerChange = (event) =>
-    {
-        name = 'message';
-        value = event.target.value;
-        setuser({ ...user, [name]: value})
-    }
-
-    const handlerSubmit = async (event) => {
-        event.preventDefault();
+    const postUserTasks = async () => {
         const {id_user, task, message} = user;
         setuser({ ...user, ['message']: ""});
         r = Math.floor(Math.random() * qwests.length);
@@ -75,6 +64,37 @@ const Quest = () => {
             const data = res.json();
             if (res.status === 400 || !data) console.log("пользователь уже существует")
         }
+    }
+
+    const editUserLevel = async () => {
+        const {id_user, task, message} = user;
+        const res = await fetch('http://localhost:1337/api/login', {
+            method: "PUT",
+            headers: { "Accept": "application/json", "Content-Type":
+            "application/json" },
+            body: JSON.stringify({
+            id_user,
+            })
+        });
+        const data = res.json();
+        if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
+        else if (res.status === 402) console.log("неверный пароль")
+         
+    }
+
+    let name, value;
+
+    const handlerChange = (event) =>
+    {
+        name = 'message';
+        value = event.target.value;
+        setuser({ ...user, [name]: value})
+    }
+
+    const handlerSubmit = async (event) => {
+        event.preventDefault();
+        postUserTasks();
+        editUserLevel();
     }
 
     return (
