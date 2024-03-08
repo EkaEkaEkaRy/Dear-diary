@@ -1,5 +1,20 @@
+.tasks_wrapper {
+    margin-bottom: 5%;
+}
 .header {
-    font-size: 1.5em;
+    @media (max-width: 480px) {
+        font-size: 1.2em;
+        margin-top: 4%;
+    }
+
+    @media (max-width: 768px) and (min-width: 481px) {
+        font-size: 1.3em;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 1.5em;
+    }
+    font-weight: 700;
 }
 .main {
     margin-top: 3%;
@@ -12,6 +27,17 @@
     margin-top: 2%;
 }
 .img {
-    
+    @media (max-width: 480px) {
+        width: 70%;
+    }
+
+    @media (max-width: 768px) and (min-width: 481px) {
+        width: 80%;
+    }
+
+    @media (min-width: 768px) {
+        width: 70%;
+    }
+    height: auto;
     border-radius: 1em;
 }
