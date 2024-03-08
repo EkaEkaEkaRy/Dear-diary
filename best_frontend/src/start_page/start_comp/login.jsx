@@ -6,10 +6,11 @@ import a from "./login.module.css"
 const LoginForm = () => {
 
     const navigate = useNavigate();
+    /*
     const [authenticated, setauthenticated] = useState(
         localStorage.getItem(localStorage.getItem("authenticated") || false));
-
-
+    */
+    
     let [user, setuser] = useState({
         mail: "",
         password: ""
@@ -39,8 +40,8 @@ const LoginForm = () => {
         const data = res.json();
         if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
         else if (res.status === 402) console.log("неверный пароль")
-            setauthenticated(true)
-            localStorage.setItem("authenticated", true);
+            //setauthenticated(true)
+            //localStorage.setItem("authenticated", true);
             navigate("/Main");
 
         
