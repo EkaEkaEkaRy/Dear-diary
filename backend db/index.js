@@ -198,6 +198,41 @@ app.put("/api/login", async(req, res)=>{
 
 /////////////////////////////////////////////////////////////////////
 
+app.get("/api/find", async(req, res) => {
+           
+    const collection = req.app.locals.collection.collection("users");
+    try{
+        const users = await collection.find({}).toArray();
+        res.send(users);
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }  
+});
+
+app.post("/api/find", async(req, res)=> {
+          
+    const {id_user} = req.body;
+    if(!req.body) return res.sendStatus(400);
+    
+    const collection = req.app.locals.collection.collection("users");
+       
+    try{
+        const username = await collection.findOne({mail: id_user});
+        if (!username) return res.sendStatus(404) 
+        else {
+            res.send(username);
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+/////////////////////////////////////////////////////////////////////
+
 app.get("/api/daily_tasks", async(req, res) => {
            
     const collection = req.app.locals.collection.collection("daily_tasks");
