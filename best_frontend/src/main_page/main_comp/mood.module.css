@@ -1,6 +1,7 @@
 .mood_wrapper {
     display: block;
     height: 100%;
+    margin-bottom: 5%;
 }
 
 .header {
@@ -8,6 +9,7 @@
 
     @media (max-width: 480px) {
         font-size: 1.2em;
+        margin-top: 4%;
     }
 
     @media (max-width: 768px) and (min-width: 481px) {
@@ -29,13 +31,13 @@
     display: grid;
 
     
-    @media  (max-width: 767px) {
+    @media (max-width: 767px) {
         grid-template-columns: 33% 33% 33%;
     }
     @media (min-width: 768px) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
-    column-gap: 5%;
+    
 }
 
 .list_item {
