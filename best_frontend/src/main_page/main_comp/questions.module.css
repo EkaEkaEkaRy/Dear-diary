@@ -1,10 +1,22 @@
 .q_wrapper {
     display: block;
     height: 100%;
+    margin-bottom: 5%;
 }
 .header {
     font-weight: 700;
-    font-size: 1.5em;
+    @media (max-width: 480px) {
+        font-size: 1.2em;
+        margin-top: 4%;
+    }
+
+    @media (max-width: 768px) and (min-width: 481px) {
+        font-size: 1.3em;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 1.5em;
+    }
 }
 .main {
     margin-top: 4%;
