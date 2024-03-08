@@ -33,7 +33,7 @@ const Signup = () => {
     const handlerSubmit = async (event) => {
         event.preventDefault();
         const {name, mail, password, password2} = user;
-        if (password !== password2) console.log("пароли не совпадают");
+        if (password !== password2) document.getElementById("answer_for_user").innerHTML = "Пароли не совпадают"
         else {
             const res = await fetch('http://localhost:1337/api/users', {
                 method: "POST",
@@ -46,12 +46,14 @@ const Signup = () => {
                 })
             });
             const data = res.json();
-            if (res.status === 400 || !data) console.log("пользователь уже существует")
+            console.log(res.status)
+            if (res.status === 400 || !data) document.getElementById("answer_for_user").innerHTML = "Пользователь уже существует"
             //setauthenticated(true)
-            localStorage.setItem('userMailId', mail);
-            navigate("/Main");
-            
-            
+            else {
+                localStorage.setItem('userMailId', mail);
+                navigate("/Main");
+            }
+
             }
             
     };
@@ -64,6 +66,7 @@ const Signup = () => {
                     <div><input className={l.input} name="mail" type="email" placeholder='Почта' value = {user.mail} onChange={handlerChange} required /></div>
                     <div><input className={l.input} name="password" type="password" placeholder='Пароль' value = {user.password} onChange={handlerChange} required /></div>
                     <div><input className={l.input} name="password2" type="password" placeholder='Повторный пароль' value = {user.password2} onChange={handlerChange} required /></div>
+                    <div id="answer_for_user"></div>
                     <div>
                             <input className={l.button} type="submit" value={"Создать аккаунт"} />
 
