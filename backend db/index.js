@@ -43,6 +43,7 @@ app.get("/api/users", async(req, res) => {
     }  
 });
 
+/*
 app.get("/api/users/:id", async(req, res) => {
   const collection = req.app.locals.collection.collection("users");
   try{
@@ -56,6 +57,7 @@ app.get("/api/users/:id", async(req, res) => {
   res.sendStatus(500);
   }
   });
+  */
       
   app.post("/api/users", async(req, res)=> {
           
@@ -84,6 +86,8 @@ app.get("/api/users/:id", async(req, res) => {
     }
 });
 
+/*
+
 app.delete("/api/users/:id", async(req, res)=>{
            
     const collection = req.app.locals.collection.collection("users");
@@ -98,7 +102,8 @@ app.delete("/api/users/:id", async(req, res)=>{
         res.sendStatus(500);
     }
 });
-      
+*/
+/*  
 app.put("/api/users", async(req, res)=>{
            
     if(!req.body) return res.sendStatus(400);
@@ -119,6 +124,7 @@ app.put("/api/users", async(req, res)=>{
         res.sendStatus(500);
     }
 });
+*/
 
 app.get("/api/login", async(req, res) => {
            
@@ -204,7 +210,7 @@ app.get("/api/daily_tasks", async(req, res) => {
         res.sendStatus(500);
     }  
 });
-
+/*
 app.get("/api/daily_tasks/:id", async(req, res) => {
   const collection = req.app.locals.collection.collection("daily_tasks");
   try{
@@ -218,7 +224,7 @@ app.get("/api/daily_tasks/:id", async(req, res) => {
   res.sendStatus(500);
   }
   });
-      
+*/ 
 app.post("/api/daily_tasks", async(req, res)=> {
           
     if(!req.body) return res.sendStatus(400);
