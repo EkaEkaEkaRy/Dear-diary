@@ -38,12 +38,15 @@ const LoginForm = () => {
             })
         });
         const data = res.json();
-        if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
-        else if (res.status === 402) console.log("неверный пароль")
+        if (res.status === 404 || !data) document.getElementById("answer_for_user").innerHTML = "пользователя не существует";
+        else if (res.status === 400) document.getElementById("answer_for_user").innerHTML ="неверный пароль";
+        else {
             //setauthenticated(true)
             //localStorage.setItem("authenticated", true);
             localStorage.setItem('userMailId', mail);
             navigate("/Main");
+          }
+        
 
         
     };
@@ -55,6 +58,7 @@ const LoginForm = () => {
                 <div className={a.login_wrapper}>
                     <div><input className={a.input} name="mail" type="text" placeholder='Почта' value={user.mail} onChange={handlerChange} required /></div>
                     <div><input className={a.input} name="password" type="password" placeholder='Пароль' value={user.password} onChange={handlerChange} required /></div>
+                    <div id="answer_for_user"></div>
                     <div>
 
                         <input className={a.button} type="submit" value={"Войти"} />

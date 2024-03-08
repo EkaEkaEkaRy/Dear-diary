@@ -47,7 +47,8 @@ const Signup = () => {
             });
             const data = res.json();
             console.log(res.status)
-            if (res.status === 400 || !data) document.getElementById("answer_for_user").innerHTML = "Пользователь уже существует"
+            if (res.status === 404 || !data) document.getElementById("answer_for_user").innerHTML = "Пользователь уже существует"
+            else if (res.status === 500) document.getElementById("answer_for_user").innerHTML = "Попробуйте позже"
             //setauthenticated(true)
             else {
                 localStorage.setItem('userMailId', mail);
