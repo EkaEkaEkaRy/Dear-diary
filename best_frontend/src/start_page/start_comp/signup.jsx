@@ -1,11 +1,11 @@
 import l from "./login.module.css"
 import {useState} from "react";
+//import {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const navigate = useNavigate();
-    const [authenticated, setauthenticated] = useState(
-        localStorage.getItem(localStorage.getItem("authenticated") || false));
+    //const [authenticated, setauthenticated] = useState(false);
 
     let [user, setuser] = useState({
         name: "",
@@ -13,7 +13,13 @@ const Signup = () => {
         password: "",
         password2: "",
     })
+    /*
+    useEffect(() => {
+        localStorage.setItem('authenticated', authenticated);
+      }, [authenticated]);
 
+    localStorage.getItem(authenticated)
+      */
     let name, value;
 
     const handlerChange = (event) =>
@@ -40,9 +46,11 @@ const Signup = () => {
             });
             const data = res.json();
             if (res.status === 400 || !data) console.log("пользователь уже существует")
-            setauthenticated(true)
-            localStorage.setItem("authenticated", true);
+            //setauthenticated(true)
+            //localStorage.setItem('authenticated', authenticated);
             navigate("/Main");
+            
+            
             }
             
     };
