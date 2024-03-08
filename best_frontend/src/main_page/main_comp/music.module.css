@@ -1,16 +1,43 @@
 .music_wrapper {
     display: block;
     width: 100%;
+    margin-bottom: 5%;
 }
 
 .header {
     font-weight: 700;
-    font-size: 1.5em;
+    @media (max-width: 480px) {
+        font-size: 1.2em;
+        margin-top: 4%;
+    }
+
+    @media (max-width: 768px) and (min-width: 481px) {
+        font-size: 1.3em;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 1.5em;
+    }
 }
 .playlists {
-    display: grid;
+    @media (max-width: 480px) {
+        display: grid;
     grid-template-columns: 33% 33% 33%;
     margin-top: 6%;
+    }
+
+    @media (max-width: 768px) {
+        display: grid;
+    grid-template-columns: 50% 50%;
+    margin-top: 6%;
+    }
+
+    @media (min-width: 768px) {
+        display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin-top: 6%;
+    }
+    
 }
 .cover {
     display: flex;
