@@ -11,7 +11,7 @@ const Header = (props) => {
         <header className={s.header}>
             <NavLink to="/Start" state={{name: userName}}> 
                 <div className={s.profile}>
-                    <img className={s.ava} src={profile} alt="АВА" />
+                    <img className={s.ava} src={profile} alt="Профиль" />
                 </div>
             </NavLink>
         </header>
@@ -23,7 +23,7 @@ const Header = (props) => {
         <header className={s.header}>
             <NavLink to="/Profile" state={{name: userName}}> 
                 <div className={s.profile}>
-                    <img className={s.ava} src={profile} alt="АВА" />
+                    <img className={s.ava} src={profile} alt="Профиль" />
                 </div>
             </NavLink>
         </header>
