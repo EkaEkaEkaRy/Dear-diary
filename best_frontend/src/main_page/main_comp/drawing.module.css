@@ -1,10 +1,22 @@
 .header {
-    font-size: 1.5em;
-}
+    font-weight: 700;
+    @media (max-width: 480px) {
+        font-size: 1.2em;
+        margin-top: 4%;
+    }
+
+    @media (max-width: 768px) and (min-width: 481px) {
+        font-size: 1.3em;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 1.5em;
+    }
+}/*
 .body {
     background: white;
 }
-/*
+
 .Toolbar {
     float: left;
     font-family: 'Trebuchet MS'; 
