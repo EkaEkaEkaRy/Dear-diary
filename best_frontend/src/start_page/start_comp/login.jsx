@@ -42,6 +42,7 @@ const LoginForm = () => {
         else if (res.status === 402) console.log("неверный пароль")
             //setauthenticated(true)
             //localStorage.setItem("authenticated", true);
+            localStorage.setItem('userMailId', mail);
             navigate("/Main");
 
         

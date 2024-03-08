@@ -20,6 +20,7 @@ const Signup = () => {
 
     localStorage.getItem(authenticated)
       */
+
     let name, value;
 
     const handlerChange = (event) =>
@@ -47,7 +48,7 @@ const Signup = () => {
             const data = res.json();
             if (res.status === 400 || !data) console.log("пользователь уже существует")
             //setauthenticated(true)
-            //localStorage.setItem('authenticated', authenticated);
+            localStorage.setItem('userMailId', mail);
             navigate("/Main");
             
             
