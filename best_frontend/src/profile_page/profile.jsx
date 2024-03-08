@@ -10,8 +10,7 @@ import { useState } from 'react';
 
 
 const Profile = () => {
-    const loc = useLocation()
-    var scale = 10;
+
 
     
     return (
