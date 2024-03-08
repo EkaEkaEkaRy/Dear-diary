@@ -9,20 +9,19 @@ import History from './profile_comp/history'
 import { useState } from 'react';
 
 
-const Profile = (props) => {
+const Profile = () => {
     const loc = useLocation()
-    const {name} = loc.state;
-    var scale = props.scale;
+    var scale = 10;
 
     
     return (
         <div className={p.app_wrapper}>
             <Header className={p.header}/>
             <main className={p.main}>
-                <Person name={name} />
+                <Person name={localStorage.getItem('userNameId')} />
                 <div className={p.content_wrapper}>
                     <div className={p.wrapper1}>
-                        <Level scale={scale}/>
+                        <Level scale={localStorage.getItem('userLevelId')}/>
                         <History />
                         
                     </div>
