@@ -60,6 +60,7 @@ const Quest = () => {
         event.preventDefault();
         const {id_user, task, message} = user;
         setuser({ ...user, ['message']: ""});
+        r = Math.floor(Math.random() * qwests.length);
             if (id_user !== "unknown_user") {
             const res = await fetch('http://localhost:1337/api/daily_tasks', {
                 method: "POST",
