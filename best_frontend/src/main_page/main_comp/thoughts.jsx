@@ -7,13 +7,6 @@ const Text = () => {
         task: "Ваши мысли",
         message: "",
     })
-    /*
-    useEffect(() => {
-        localStorage.setItem('authenticated', authenticated);
-      }, [authenticated]);
-
-    localStorage.getItem(authenticated)
-      */
 
     let name, value;
 
