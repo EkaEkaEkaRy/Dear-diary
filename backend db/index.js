@@ -156,6 +156,38 @@ app.post("/api/login", async(req, res)=> {
         res.sendStatus(500);
     }
 });
+
+app.put("/api/login", async(req, res)=>{
+    const {id_user} = req.body;  
+    const collection = req.app.locals.collection.collection("users");
+       
+    try{
+        const username = await collection.findOne({mail: id_user})
+        if (!username) return res.status(400) 
+        else {
+            const userName = username.name;
+            const userMail = id_user;
+            const userPassword = username.password;
+            const userLevel = username.level + 1;
+        
+            try{
+                const user = await collection.findOneAndUpdate({mail: id_user}, { $set: {name: userName, mail: userMail, password: userPassword, level: Number(userLevel)}},
+                 {returnDocument: "after" });
+                if(user) res.send(user);
+                else res.sendStatus(404);
+            }
+            catch(err){
+                console.log(err);
+                res.sendStatus(500);
+            }
+        
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
  
 
 /////////////////////////////////////////////////////////////////////
