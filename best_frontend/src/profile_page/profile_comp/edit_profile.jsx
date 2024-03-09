@@ -28,11 +28,38 @@ const Edit_form = () => {
         value = event.target.value;
         setuser({ ...user, [name]: value})
     }
-
+/*
     const delete_accaunt = async (event) => {
         event.preventDefault();
-    }
+        let id;
+        const id_user = localStorage.getItem('userMailId');
+        const res = await fetch('http://localhost:1337/api/edit', {
+            method: "POST",
+            headers: { "Accept": "application/json", "Content-Type":
+            "application/json" },
+            body: JSON.stringify({
+            id_user,
+            })
+        });
+        const data = await res.json();
+        console.log(res.ok)
+        if (res.status === 400 || !data) console.log("пользователя с таким именем не существует")
+        else if (res.ok){
+            id = data._id
+            console.log(id)
+        }
 
+        const res2 = await fetch('http://localhost:1337/api/users' + id, {
+            method: "DELETE",
+            headers: { "Accept": "application/json", "Content-Type":
+            "application/json" }
+            });
+            if (res2.ok === true) {
+                localStorage.setItem('userMailId', null)
+                navigate("/Start");
+            }
+    }
+*/
     const handlerSubmit = async (event) => {
         event.preventDefault();
         const {name, password, password2} = user;
@@ -76,7 +103,6 @@ const Edit_form = () => {
                     </div>
                 </div>
             </form>
-            <input className={l.button} onClick={delete_accaunt} value={"Удалить аккаунт"} />
         </div>    
     )
 }
