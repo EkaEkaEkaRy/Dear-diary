@@ -52,7 +52,7 @@ const Header = () => {
     };
 
 
-    if (localStorage.getItem('userMailId') === "unknown_user")
+    if (localStorage.getItem('userMailId') === "unknown_user" || localStorage.getItem('userMailId') === null)
     return (
         // здесь я передаю имя пользователя в state на страницу profile
         <header className={s.header}>

@@ -7,12 +7,13 @@ import Level from './profile_comp/level'
 import Settings from './profile_comp/settings'
 import History from './profile_comp/history'
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 
 
 const Profile = () => {
-
-
-    
+    const navigate = useNavigate();
+    if (localStorage.getItem('userMailId') === 'unknown_user' || localStorage.getItem('userMailId') === null) navigate('/Start')
+    else
     return (
         <div className={p.app_wrapper}>
             <Header className={p.header}/>
