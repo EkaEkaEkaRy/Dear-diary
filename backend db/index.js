@@ -154,7 +154,7 @@ app.post("/api/login", async(req, res)=> {
         if (!username) return res.sendStatus(404) 
         else {
             if (username.password !== userPassword) return res.sendStatus(400)
-            res.send(user);
+            res.send(username);
         }
     }
     catch(err){
@@ -283,7 +283,42 @@ app.post("/api/daily_tasks", async(req, res)=> {
 });
 
 /////////////////////////////////////////////////////////////////////
+  
+app.get("/api/get_daily_tasks", async(req, res) => {
+           
+    const collection = req.app.locals.collection.collection("daily_tasks");
+    try{
+        const users = await collection.find({}).toArray();
+        res.send(users);
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }  
+});
+
+app.post("/api/get_daily_tasks", async(req, res)=> {
+          
+    const {id_user} = req.body;
+    if(!req.body) return res.sendStatus(400);
     
+    const collection = req.app.locals.collection.collection("daily_tasks");
+       
+    try{
+        const username = await collection.find({id_user: id_user}).toArray();
+        if (!username) return res.sendStatus(404) 
+        else {
+            res.send(username);
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+/////////////////////////////////////////////////////////////////////
+
 // прослушиваем прерывание работы программы (ctrl-c)
 process.on("SIGINT", async() => {
        
