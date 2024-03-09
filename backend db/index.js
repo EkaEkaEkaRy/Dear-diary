@@ -3,7 +3,7 @@ const MongoClient = require("mongodb").MongoClient;
 const objectId = require("mongodb").ObjectId;
 var currentDate = new Date();
 
-const encoder = require("./cipher/encoder");
+const encoder = require("./cipher/cipher/encoder");
 //const ReturnUserAnswer = require("./cipher/chat/chatAnswer")
       
 const app = express();
@@ -103,28 +103,35 @@ app.delete("/api/users/:id", async(req, res)=>{
     }
 });
 */
-/*  
+ 
 app.put("/api/users", async(req, res)=>{
            
     if(!req.body) return res.sendStatus(400);
-    const userName = req.body.name;
-    const userMail = req.body.mail;
-    const userPassword = encoder.encoded(req.body.password);
-    const userLevel = req.body.level;
-          
-    const collection = req.app.locals.collection.collection("users");
-    try{
-        const user = await collection.findOneAndUpdate({mail: userMail}, { $set: {name: userName, mail: userMail, password: userPassword, level: Number(userLevel)}},
-         {returnDocument: "after" });
-        if(user) res.send(user);
-        else res.sendStatus(404);
+    const {mailuserID, name, password} = req.body;
+    const collection = req.app.locals.collection.collection("users")
+    try {
+        const user_elem = await collection.findOne({mail: mailuserID});
+        const userName = name;
+        const userPassword = encoder.encoded(password);
+        const userLevel = user_elem.level;
+        try{
+            const user = await collection.findOneAndUpdate({mail: mailuserID}, { $set: {name: userName, mail: mailuserID, password: userPassword, level: Number(userLevel)}},
+             {returnDocument: "after" });
+            if(user) res.send(user);
+            else res.sendStatus(404);
+        }
+        catch(err){
+            console.log(err);
+            res.sendStatus(500);
+        }
     }
+    
     catch(err){
         console.log(err);
         res.sendStatus(500);
     }
 });
-*/
+
 
 app.get("/api/login", async(req, res) => {
            
@@ -195,6 +202,35 @@ app.put("/api/login", async(req, res)=>{
     }
 });
  
+//////////////////////////////////////////////////////////////
+
+app.get("/api/edit", async(req, res) => {
+           
+    const collection = req.app.locals.collection.collection("users");
+    try{
+        const users = await collection.find({}).toArray();
+        res.send(users);
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }  
+});
+
+app.post("/api/edit", async(req, res)=>{
+    const {id_user} = req.body;  
+    const collection = req.app.locals.collection.collection("users");
+       
+    try{
+        const username = await collection.findOne({mail: id_user})
+        if (!username) return res.status(400) 
+        else res.send(username);
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
 
 /////////////////////////////////////////////////////////////////////
 
