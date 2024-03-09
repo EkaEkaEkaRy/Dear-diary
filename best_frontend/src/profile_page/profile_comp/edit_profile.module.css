@@ -12,10 +12,8 @@
 }
 
 .login_wrapper div {
-  padding: 8px 0;
+  padding: 2px 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .input {
