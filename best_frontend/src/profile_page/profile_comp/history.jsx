@@ -2,28 +2,30 @@
 
 import { Component } from 'react'
 import h from './history.module.css'
-const entrances = [
+const entrance = [
     {
         date: "01.02.2001",
-        category: 'мысли',
-        ans: ["Сегодня меня били дома, в школе, на доп занятиях и по дороге домой! Люблю жизнь"]
+        qwesion: 'мысли',
+        answer: ["Сегодня меня били дома, в школе, на доп занятиях и по дороге домой! Люблю жизнь"]
     },
     {
         date: "01.02.2001",
-        category: "вопрос",
-        ans: ["Какая самая полезная вещь находится у тебя в комнате?", "Гранатомет. В нужный момент никогда не подводил"]
+        qwesion: "вопрос",
+        answer: ["Какая самая полезная вещь находится у тебя в комнате?", "Гранатомет. В нужный момент никогда не подводил"]
     },
     {
         date: "15.01.2001",
-        category: 'настроение',
-        ans: ["Тревожность", "Апатия"]
+        qwesion: 'настроение',
+        answer: ["Тревожность", "Апатия"]
     },
     {
         date: "16.01.2001",
-        category: 'настроение',
-        ans: ["радость"]
+        qwesion: 'настроение',
+        answer: ["радость"]
     },
 ]
+
+let entrances;
 
 class History extends Component {
     constructor(props) {
@@ -37,7 +39,8 @@ class History extends Component {
         this.setState({
             shouldshowElem: true,
         })
-
+        entrances = JSON.parse(localStorage.getItem('userInfoId'))
+        
     }
     render() {
         const Main = () => {
@@ -48,14 +51,8 @@ class History extends Component {
                             return (
                                 <div key={en.id} className={h.item}>
                                     <div className={h.date}>{en.date}</div>
-                                    <div className={h.cat}>{en.category}</div>
-                                    {
-                                        en.ans.map(a => {
-                                            return (
-                                                <div>{a}</div>
-                                            )
-                                        })
-                                    }
+                                    <div className={h.cat}>{en.qwesion}</div>
+                                    <div>{en.answer}</div>
                                 </div>
                             )
                         })
