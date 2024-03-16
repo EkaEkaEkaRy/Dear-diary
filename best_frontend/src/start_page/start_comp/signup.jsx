@@ -35,7 +35,7 @@ const Signup = () => {
         const {name, mail, password, password2} = user;
         if (password !== password2) document.getElementById("answer_for_user").innerHTML = "Пароли не совпадают"
         else {
-            const res = await fetch('http://localhost:1337/api/users', {
+            const res = await fetch('http://localhost:1330/api/users', {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type":
                 "application/json" },
