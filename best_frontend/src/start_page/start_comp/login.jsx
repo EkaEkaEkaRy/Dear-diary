@@ -28,7 +28,7 @@ const LoginForm = () => {
     const handlerSubmit = async (event) => {
         event.preventDefault();
         const {mail, password} = user;
-        const res = await fetch('http://localhost:1337/api/login', {
+        const res = await fetch('http://localhost:1330/api/login', {
             method: "POST",
             headers: { "Accept": "application/json", "Content-Type":
             "application/json" },
